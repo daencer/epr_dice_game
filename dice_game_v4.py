@@ -113,3 +113,5 @@ while count >= name_players():
                 break
         except(IndexError, ValueError,):
             print("ERROR!!1!11!")
+
+
