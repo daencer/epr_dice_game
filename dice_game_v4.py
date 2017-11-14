@@ -114,6 +114,3 @@ while count >= name_players():
         except(IndexError, ValueError,):
             print("ERROR!!1!11!")
 
-
-
-MARKUS
