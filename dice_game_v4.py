@@ -88,7 +88,7 @@ def sixteen_is_dead(players):
     for i in range(players):
         total = 0
         print("\n")
-        print(member_list[count], "ist am Zug!")
+        print(member_list[i], "ist am Zug!")
         # roll the dice(s) without end
         while True:
             cin = input("Würfeln 'Enter', Aufhören 'n'")
@@ -101,7 +101,7 @@ def sixteen_is_dead(players):
                 print('Gewuerfelt:', result, 'Summiert:', total)
                 # if player reaches the total of 9
                 if total == 9:
-                    time.sleep(3)
+                    sleep(3)
                     result = int(roll_dice())  # Function to sum up the String is missing !!!
                     total += result
                     break
