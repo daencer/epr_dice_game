@@ -42,3 +42,34 @@ def roll_cheating_dice(seed = None):
 # Function: Game
 def sixteen_is_dead(players):
     print(None)
+# Function: amount of Players
+def players():
+    while True:
+        try:
+            players = int(input("Geben Sie ihre Spieleranzahl ein: "))
+            if players == 'stop':
+                quit()
+                # else:
+                # players_new = input("Bitte eine Zahl eingeben: ")
+            break
+        except(ValueError, IndexError):
+            print("Try again must be a number!")
+    return players
+
+# Function: Name the players
+def name_players():
+    member = []
+
+    counter_player = players()
+    count = 1
+    while count <= counter_player:
+        player_name = input("Name eingeben: ")
+        member.append(player_name)
+        count += 1
+
+
+
+# ~~~~~~~~~~~~~~~~ Main Game Frame ~~~~~~~~~~~~~~~~~~~~~
+
+print("########################################")
+print("# [1] Play the Dice Game               #")

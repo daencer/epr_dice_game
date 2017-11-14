@@ -1,49 +1,4 @@
-from random import randint
-import pygame
-running = True
-while running:
-    screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption("Dice Game!!11!!1")
-    pygame.mouse.set_visible(1)
-    pygame.key.set_repeat(1, 60)
-    screen.fill((0, 0, 0))
-
-
-for event in pygame.event.get():
-    # Spiel beenden, wenn wir ein QUIT-Event finden.
-
-    if event.type == pygame.QUIT:
-        running = False
-
-    # Wir interessieren uns auch für "Taste gedrückt"-Events.
-
-    if event.type == pygame.KEYDOWN:
-
-        # Wenn Escape gedrückt wird, posten wir ein QUIT-Event in Pygames Event-Warteschlange.
-
-        if event.key == pygame.K_ESCAPE:
-            pygame.event.post(pygame.event.Event(pygame.QUIT))
-
-        if event.key == pygame.K_ESCAPE:
-            running = False
-            print("W")
-
-        if event.key == pygame.K_a:
-            print("A")
-
-        if event.key == pygame.K_s:
-            print("S")
-
-        if event.key == pygame.K_d:
-            print("D")
-
-# Inhalt von screen anzeigen.
-
-pygame.display.flip()
-
-print("Spiel beginnt")
-
-
+from random
 # Function: Roll Dice
 def roll_dice(number = 1, faces = 6, seed = None):
     result = ''
@@ -76,54 +31,80 @@ while count <= counter_player:
     player_name = input("Name eingeben: ")
     member.append(player_name)
     count += 1
+print(member)
+toss_1 = roll_dice()
+print(toss_1)
 
-print()
+"""Docstring: A very short sentence explaining the function. < 79 characters.
 
+additional informaion if required
+and more infos
 
+"""
 
-
-
-'''
-value = numb_players()
-print(value)
 import random
 
-liste_1 = [1, 2, 3, 4, 5, 6]
-list_2 = []
-list_3 = []
-list_4 = []
-scoreboard = []
-count = 1
-while count <= value:
-    player_name = input("Name eingeben: ")
-    list_4.append(player_name)
-    count += 1
-    print(list_4)
+# from numpy import array  #  an aother example
+# from meinmodul import test  #  example for your own module
 
-index_list = 0
-while index_list <= value - 1:
-    print(list_4[index_list], " ist am Zug!")
-    t_player_1 = input("Weiter würfeln: Enter, Aufhören: n: ")
-    if t_player_1 == "":
-        x = roll_dice()
-        list_2.append(x)
-        z = sum(list_2)
-        print(x)
-        print("Die Summe ihrer Würfe ist: ", z)
-    elif sum(list_2) == 10:
-        t_player_1 = input("Sie müssen nochmal würfeln!")
-    elif t_player_1 == "stop":
-        print(z)
-        quit()
-    elif sum(list_2) >= 16 or sum(list_2) == 9:
-        print("Sie haben verloren! try again!")
-        break
-    elif t_player_1 == "n":
-        index_list += 1
-        scoreboard.append(sum(list_2))
-        list_2 = []
+__author__ = "6598273: Markus Kalusche, 6768647: Tobias Denzer"  # your data
+__copyright__ = "Copyright 2017/2018 – EPR-Goethe-Uni"
+__credits__ = "If you would like to thank somebody \
+i.e. an other student for his code"
+__email__ = "s1539940@stud.uni-frankfurt.de"
 
-print(list_3)
-print(scoreboard)
-print("Spiel ist vorbei!!")
-'''
+# Function: Checks if a number is in specific interval
+def in_interval(number, start, stop):
+    ok = False
+    if number >= start and number <= stop:
+        ok = True
+    return ok
+
+# Function: Roll Dice
+def roll_dice(number = 1, faces = 6, seed = None):
+    result = ''
+    random.seed(seed)
+    for i in range(number):
+            result += str(random.randint(1, faces))
+            if i + 1 < number:
+                result += ','
+    return result
+
+# Function: Roll Cheating Dice
+def roll_cheating_dice(seed = None):
+    faces = [1, 2, 3, 3, 4, 5, 6]
+    random.seed(seed)
+    return str(random.choice(faces))
+
+# Function: Game
+def sixteen_is_dead(players):
+    print(None)
+# Function: amount of Players
+def players():
+    while True:
+        try:
+            players = int(input("Geben Sie ihre Spieleranzahl ein: "))
+            if players == 'stop':
+                quit()
+            break
+        except(ValueError, IndexError):
+            print("Try again must be a number!")
+    return players
+
+# Function: Name the players
+def name_players():
+    member = []
+
+    counter_player = players()
+    count = 1
+    while count <= counter_player:
+        player_name = input("Name eingeben: ")
+        member.append(player_name)
+        count += 1
+
+
+
+# ~~~~~~~~~~~~~~~~ Main Game Frame ~~~~~~~~~~~~~~~~~~~~~
+
+print("########################################")
+print("# [1] Play the Dice Game               #")
