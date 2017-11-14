@@ -1,20 +1,60 @@
 from random import randint
+import pygame
+running = True
+while running:
+    screen = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("Dice Game!!11!!1")
+    pygame.mouse.set_visible(1)
+    pygame.key.set_repeat(1, 60)
+    screen.fill((0, 0, 0))
 
-# Aufgabe 3.2 a)
+for event in pygame.event.get():
+    # Spiel beenden, wenn wir ein QUIT-Event finden.
 
-# def sixteen_is_dead(players):
+    if event.type == pygame.QUIT:
+        running = False
+
+    # Wir interessieren uns auch für "Taste gedrückt"-Events.
+
+    if event.type == pygame.KEYDOWN:
+
+        # Wenn Escape gedrückt wird, posten wir ein QUIT-Event in Pygames Event-Warteschlange.
+
+        if event.key == pygame.K_ESCAPE:
+            pygame.event.post(pygame.event.Event(pygame.QUIT))
+
+        if event.key == pygame.K_ESCAPE:
+            running = False
+            print("W")
+
+        if event.key == pygame.K_a:
+            print("A")
+
+        if event.key == pygame.K_s:
+            print("S")
+
+        if event.key == pygame.K_d:
+            print("D")
+
+# Inhalt von screen anzeigen.
+
+pygame.display.flip()
+
 print("Spiel beginnt")
 
 
-def roll_dice():
-    randint(1, 6)
-    return
+# Function: Roll Dice
+def roll_dice(number = 1, faces = 6, seed = None):
+    result = ''
+    random.seed(seed)
+    for i in range(number):
+            result += str(random.randint(1, faces))
+            if i + 1 < number:
+                result += ','
+    return result
 
 
-roll_dice()
-
-
-def numb_players():
+def players():
     while True:
         try:
             players = int(input("Geben Sie ihre Spieleranzahl ein: "))
@@ -27,7 +67,22 @@ def numb_players():
             print("Try again must be a number!")
     return players
 
+member = []
 
+counter_player = players()
+count = 1
+while count <= counter_player:
+    player_name = input("Name eingeben: ")
+    member.append(player_name)
+    count += 1
+
+print()
+
+
+
+
+
+'''
 value = numb_players()
 print(value)
 import random
@@ -49,58 +104,25 @@ while index_list <= value - 1:
     print(list_4[index_list], " ist am Zug!")
     t_player_1 = input("Weiter würfeln: Enter, Aufhören: n: ")
     if t_player_1 == "":
-        x = int(random.choice(liste_1))
+        x = roll_dice()
         list_2.append(x)
         z = sum(list_2)
         print(x)
         print("Die Summe ihrer Würfe ist: ", z)
-    elif z == 10:
+    elif sum(list_2) == 10:
         t_player_1 = input("Sie müssen nochmal würfeln!")
     elif t_player_1 == "stop":
         print(z)
         quit()
-    elif z >= 16 or z == 9:
+    elif sum(list_2) >= 16 or sum(list_2) == 9:
         print("Sie haben verloren! try again!")
         break
     elif t_player_1 == "n":
         index_list += 1
         scoreboard.append(sum(list_2))
         list_2 = []
-    else:
-        print(player_1, "Ihr Ergebnis lautet: ", z)
-        if z >= 16 or z == 9:
-            print("Sie haben verloren")
-            print(toss_2)
-            break
-        else:
-            print(toss_2)
-            break
+
 print(list_3)
 print(scoreboard)
-
+print("Spiel ist vorbei!!")
 '''
-while True:
-    t_player_2 = input("Weiter würfeln: Enter, Aufhören: n: ")
-    if t_player_2 == "":
-        v = int(random.choice(liste_1))
-        list_3.append(v)
-        q = sum(list_3)
-        print(v)
-        print("Die Summe ihrer Würfe ist: ",q)
-    elif t_player_1 == "stop":
-        print(q)
-        quit()
-    else:
-        print(player_2, "Ihr Ergebnis lautet: ", q)
-        if q >= 16 or z == 9:
-            print("Sie haben leider verloren")
-        else:
-            break
-        break
-'''
-print("Spiel ist vorbei")
-
-
-# Spieler am Zug
-# while bedingung einbauen wenn die eingabe nicht enter ist ->
-# sixteen ist dead soll komplettes programm aufbauen
