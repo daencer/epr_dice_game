@@ -77,7 +77,6 @@ def name_players():
         #print(member)
     return member
 
-
 # Function: Game
 def sixteen_is_dead(players):
     loser = []
