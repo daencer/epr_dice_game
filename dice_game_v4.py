@@ -93,4 +93,26 @@ while True:
     except(ValueError, IndexError):
         print("Try again must be a number!")
 
+count = 1
+while count >= amount_players():
+
+    state = True
+    score = []
+    while state == True:
+        try:
+            print("'Enter' to toss the dice!")
+            print("'n' to pass this round!")
+            console_input = input(">_ ")
+            if console_input == "":
+                dice_points = roll_dice()
+                score.append(int(dice_points))
+                print("Your dice:")
+                print(sum(score))
+            elif console_input == "n":
+                print("Your Score was: ", sum(score))
+                break
+        except(IndexError, ValueError,):
+            print("ERROR!!1!11!")
+
+
 
