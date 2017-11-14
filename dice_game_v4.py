@@ -104,37 +104,41 @@ while True:
             dice_eyes = []
 
             while count <= len(member_list) - 1:
-                print("\n")
-                print(member_list[count],"ist am Zug!")
-                user_input = input("Würfeln 'Enter', Aufhören 'n': ")
-                if user_input == "":
-                    x = roll_dice()
-                    score.append(int(x))
-                    z = sum(score)
-                    print("Gewürfelt:   " + x )
-                    print("Insgesamt:   " + str(z))
-#AB HIER FUNKTIONIERT NOCH NICHTS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                elif sum(score) == 10:
-                    user_input = input("Sie müssen nochmal würfeln!")
-                elif user_input == "stop":
-                    print(z)
-                    quit()
-                elif sum(score) >= 16 or z == 9:
-                    print("Sie haben verloren! try again!")
-                    break
-                elif user_input == "n":
-                    count += 1
-                    score.append(sum(score))
-                    score = []
-                else:
-                    print(player_1, "Ihr Ergebnis lautet: ", z)
-                    if z >= 16 or z == 9:
-                        print("Sie haben verloren")
-                        print(toss_2)
-                        break
-                    else:
-                        print(toss_2)
-                        break
+                try:
+                    print("\n")
+                    print(member_list[count],"ist am Zug!")
+                    user_input = input("Würfeln 'Enter', Aufhören 'n': ")
+                    sleep(3)
+                    if user_input == "":
+                        x = roll_dice()
+                        score.append(int(x))
+                        z = sum(score)
+                        print("Gewürfelt:   " + x )
+                        print("Insgesamt:   " + str(z))
+    #AB HIER FUNKTIONIERT NOCH NICHTS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#                    elif sum(score) == 10:
+ #                       user_input = input("Sie müssen nochmal würfeln!")
+  #                  elif user_input == "stop":
+   #                     print(z)
+    #                    quit()
+     #               elif sum(score) >= 16 or z == 9:
+      #                  print("Sie haben verloren! try again!")
+       #                 break
+        #            elif user_input == "n":
+         #               count += 1
+          #              score.append(sum(score))
+           #             score = []
+            #        else:
+             #           print(player_1, "Ihr Ergebnis lautet: ", z)
+              #          if z >= 16 or z == 9:
+               #             print("Sie haben verloren")
+                #            print(toss_2)
+                 #           break
+                  #      else:
+                   #         print(toss_2)
+                    #        break
+                except(IndexError, ValueError):
+                    print("Only 'Enter' or 'n'")
 #BIS HIER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         elif console == 2:
