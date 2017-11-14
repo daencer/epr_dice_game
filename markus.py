@@ -5,7 +5,7 @@ and more infos
 
 """
 
-import random
+import random, time
 
 # from numpy import array  #  an aother example
 # from meinmodul import test  #  example for your own module
@@ -41,35 +41,51 @@ def roll_cheating_dice(seed = None):
 
 # Function: Game
 def sixteen_is_dead(players):
-    print(None)
-# Function: amount of Players
-def amount_players():
-    while True:
-        try:
-            players = int(input("Geben Sie ihre Spieleranzahl ein: "))
-            if players == 'stop':
-                quit()
-                # else:
-                # players_new = input("Bitte eine Zahl eingeben: ")
+    loser = []
+    lowest_result = 0
+    hit_sixteen = False
+
+    # pass through every player
+    for i in range(players):
+        total = 0
+        print('Spieler', i)
+        # roll the dice(s) without end
+        while True:
+            cin = input('Um zu wuerfeln, druecke ENTER... ')
+            if cin == 'n':
+                # stop if player don't want anymore
+                break
+            else:
+                result = int(roll_dice()) #Function to sum up the String is missing !!!
+                total += result
+                print('Gewuerfelt:', result, 'Summiert:', total)
+                # if player reaches the total of 9
+                if total == 9:
+                    time.sleep(3)
+                    result = int(roll_dice())  # Function to sum up the String is missing !!!
+                    total += result
+                    break
+                # stop if player reaches the total of 16 or higher
+                if total >= 16:
+                    hit_sixteen = True
+                    loser = [i]
+                    break
+        # assume that player one has the lowest result
+        if i == 0:
+            lowest_result = total
+        # add new loser to others
+        if total == lowest_result:
+            loser.append(i)
+        # define new loser
+        if total < lowest_result:
+            loser = [i]
+            lowest_result = total
+        print('schlechteste aktuell:', loser, 'mit', lowest_result)
+        if hit_sixteen:
             break
-        except(ValueError, IndexError):
-            print("Try again must be a number!")
-    return players
+    if hit_sixteen:
+        print('Die 16 wurde getroffen')
+    else:
+        print('Verlierer ist/sind', loser, 'mit nur', lowest_result)
 
-# Function: Name the players
-def name_players():
-    member = []
-
-    counter_player = players()
-    count = 1
-    while count <= counter_player:
-        player_name = input("Name eingeben: ")
-        member.append(player_name)
-        count += 1
-
-
-
-# ~~~~~~~~~~~~~~~~ Main Game Frame ~~~~~~~~~~~~~~~~~~~~~
-
-print("########################################")
-print("# [1] Play the Dice Game               #")
+sixteen_is_dead(9)
