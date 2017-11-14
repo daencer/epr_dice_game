@@ -51,10 +51,6 @@ def roll_cheating_dice(seed = None):
     random.seed(seed)
     return str(random.choice(faces))
 
-# Function: Game
-def sixteen_is_dead(players):
-    print(None)
-
 
 # Function: amount of Players
 def amount_players():
@@ -82,6 +78,58 @@ def name_players():
     return member
 
 
+# Function: Game
+def sixteen_is_dead(players):
+    loser = []
+    lowest_result = 0
+    hit_sixteen = False
+
+    # pass through every player
+    for i in range(players):
+        total = 0
+        print("\n")
+        print(member_list[count], "ist am Zug!")
+        # roll the dice(s) without end
+        while True:
+            cin = input("Würfeln 'Enter', Aufhören 'n'")
+            if cin == 'n':
+                # stop if player don't want anymore
+                break
+            else:
+                result = int(roll_dice()) #Function to sum up the String is missing !!!
+                total += result
+                print('Gewuerfelt:', result, 'Summiert:', total)
+                # if player reaches the total of 9
+                if total == 9:
+                    time.sleep(3)
+                    result = int(roll_dice())  # Function to sum up the String is missing !!!
+                    total += result
+                    break
+                # stop if player reaches the total of 16 or higher
+                if total >= 16:
+                    hit_sixteen = True
+                    loser = [i]
+                    break
+        # assume that player one has the lowest result
+        if i == 0:
+            lowest_result = total
+        # add new loser to others
+        if total == lowest_result:
+            loser.append(i)
+        # define new loser
+        if total < lowest_result:
+            loser = [i]
+            lowest_result = total
+        print('schlechteste aktuell:', loser, 'mit', lowest_result)
+        if hit_sixteen:
+            break
+    if hit_sixteen:
+        print('Die 16 wurde getroffen')
+    else:
+        print('Verlierer ist/sind', loser, 'mit nur', lowest_result)
+
+
+
 # ~~~~~~~~~~~~~~~~ Main Game Frame ~~~~~~~~~~~~~~~~~~~~~
 
 print("########################################")
@@ -102,7 +150,7 @@ while True:
             count = 0
             score = []
             dice_eyes = []
-
+            sixteen_is_dead(len(member_list))
             while count <= len(member_list) - 1:
                 try:
                     print("\n")
