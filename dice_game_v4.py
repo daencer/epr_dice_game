@@ -6,9 +6,19 @@ and more infos
 """
 
 import random
+
+
 from time import sleep
 # from numpy import array  #  an aother example
 # from meinmodul import test  #  example for your own module
+
+# Disable
+def blockPrint():
+    sys.stdout = open(os.devnull, 'w')
+
+# Restore
+def enablePrint():
+    sys.stdout = sys.__stdout__
 
 __author__ = "6598273: Markus Kalusche, 6768647: Tobias Denzer"  # your data
 __copyright__ = "Copyright 2017/2018 – EPR-Goethe-Uni"
@@ -65,10 +75,11 @@ def name_players():
     counter_player = amount_players()
     count = 1
     while count <= counter_player:
-        player_name = input("Name eingeben: ")
+        player_name = input("Name von Spieler " + str(count) + " eingeben: ")
         member.append(player_name)
         count += 1
-        print(member)
+        #print(member)
+    return member
 
 
 # ~~~~~~~~~~~~~~~~ Main Game Frame ~~~~~~~~~~~~~~~~~~~~~
@@ -81,39 +92,57 @@ print("#                                      #")
 print("# What is the correct answer?....      #")
 print("########################################")
 
-
 while True:
     try:
-        console_input = int(input("Choose wisely: "))
-        if console_input == 1:
-            print("Lets start the Game!")
-            amount_players()
-            name_players()
+        console = int(input("Choose wisely: "))
+        print( "\n")
+        if console == 1:
+            #name_players() starts the amount_players() and the return of name_players() is safed in member_list
+            member_list = name_players()
+            count = 0
+            score = []
+            dice_eyes = []
+
+            while count <= len(member_list) - 1:
+                print("\n")
+                print(member_list[count],"ist am Zug!")
+                user_input = input("Würfeln 'Enter', Aufhören 'n': ")
+                if user_input == "":
+                    x = roll_dice()
+                    score.append(int(x))
+                    z = sum(score)
+                    print("Gewürfelt:   " + x )
+                    print("Insgesamt:   " + str(z))
+#AB HIER FUNKTIONIERT NOCH NICHTS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                elif sum(score) == 10:
+                    user_input = input("Sie müssen nochmal würfeln!")
+                elif user_input == "stop":
+                    print(z)
+                    quit()
+                elif sum(score) >= 16 or z == 9:
+                    print("Sie haben verloren! try again!")
+                    break
+                elif user_input == "n":
+                    count += 1
+                    score.append(sum(score))
+                    score = []
+                else:
+                    print(player_1, "Ihr Ergebnis lautet: ", z)
+                    if z >= 16 or z == 9:
+                        print("Sie haben verloren")
+                        print(toss_2)
+                        break
+                    else:
+                        print(toss_2)
+                        break
+#BIS HIER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        elif console == 2:
+            print("Settings")
+        elif console == 3:
+            print("Credits")
+        elif console == 42:
+            print("cheat Menu")
         break
-    except(ValueError, IndexError):
-        print("Try again must be a number!")
-
-count = 1
-while count >= name_players():
-
-    state = True
-    score = []
-    while state == True:
-        try:
-            print("'Enter' to toss the dice!")
-            print("'n' to pass this round!")
-            console_input = input(">_ ")
-            if console_input == "":
-                dice_points = roll_dice()
-                score.append(int(dice_points))
-                print("Your dice:")
-                print(sum(score))
-            elif console_input == "n":
-                print("Your Score was: ", sum(score))
-                break
-        except(IndexError, ValueError,):
-            print("ERROR!!1!11!")
-
-
-
-
+    except(IndexError, ValueError):
+        print("Only numbers!")
