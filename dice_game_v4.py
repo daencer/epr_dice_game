@@ -150,18 +150,19 @@ while True:
             score = []
             dice_eyes = []
             sixteen_is_dead(len(member_list))
-            while count <= len(member_list) - 1:
-                try:
-                    print("\n")
-                    print(member_list[count],"ist am Zug!")
-                    user_input = input("Würfeln 'Enter', Aufhören 'n': ")
-                    sleep(3)
-                    if user_input == "":
-                        x = roll_dice()
-                        score.append(int(x))
-                        z = sum(score)
-                        print("Gewürfelt:   " + x )
-                        print("Insgesamt:   " + str(z))
+
+ #           while count <= len(member_list) - 1:
+  #              try:
+   #                 print("\n")
+    #                print(member_list[count],"ist am Zug!")
+     #               user_input = input("Würfeln 'Enter', Aufhören 'n': ")
+      #              sleep(3)
+       #             if user_input == "":
+        #                x = roll_dice()
+         #               score.append(int(x))
+          #              z = sum(score)
+           #             print("Gewürfelt:   " + x )
+            #            print("Insgesamt:   " + str(z))
     #AB HIER FUNKTIONIERT NOCH NICHTS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #                    elif sum(score) == 10:
  #                       user_input = input("Sie müssen nochmal würfeln!")
@@ -184,8 +185,8 @@ while True:
                   #      else:
                    #         print(toss_2)
                     #        break
-                except(IndexError, ValueError):
-                    print("Only 'Enter' or 'n'")
+            #    except(IndexError, ValueError):
+             #       print("Only 'Enter' or 'n'")
 #BIS HIER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         elif console == 2:
