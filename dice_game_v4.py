@@ -8,6 +8,7 @@ while running:
     pygame.key.set_repeat(1, 60)
     screen.fill((0, 0, 0))
 
+
 for event in pygame.event.get():
     # Spiel beenden, wenn wir ein QUIT-Event finden.
 
