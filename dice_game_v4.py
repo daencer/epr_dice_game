@@ -94,7 +94,7 @@ while True:
         print("Try again must be a number!")
 
 count = 1
-while count >= amount_players():
+while count >= name_players():
 
     state = True
     score = []

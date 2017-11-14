@@ -43,7 +43,7 @@ def roll_cheating_dice(seed = None):
 def sixteen_is_dead(players):
     print(None)
 # Function: amount of Players
-def players():
+def amount_players():
     while True:
         try:
             players = int(input("Geben Sie ihre Spieleranzahl ein: "))
