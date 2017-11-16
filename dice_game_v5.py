@@ -83,6 +83,7 @@ def team_blue(x):
         print("#       Tobias Denzer      #")
         print("#                          #")
         print("############################")
+        print("\n")
 
 # Function: Game
 def sixteen_is_dead(players, members):
@@ -163,26 +164,28 @@ def sixteen_is_dead(players, members):
         print('mit nur', lowest_result, 'Summenpunkten')
 
 # ~~~~~~~~~~~~~~~~ Main Game Frame ~~~~~~~~~~~~~~~~~~~~~
+def main():
+    print("########################################")
+    print("# [1] Play the Dice Game               #")
+    print("# [2] Credits                          #")
+    print("#                                      #")
+    print("# What is the correct answer?....      #")
+    print("########################################")
 
-print("########################################")
-print("# [1] Play the Dice Game               #")
-print("# [2] Settings                         #")
-print("# [3] Credits                          #")
-print("#                                      #")
-print("# What is the correct answer?....      #")
-print("########################################")
+    while True:
+        try:
+            cin = int(input("Choose wisely: "))
 
-while True:
-    try:
-        cin = int(input("Choose wisely: "))
+            print( "\n")
+            if cin == 1:
+                member_list = name_players()
+                sixteen_is_dead(len(member_list), member_list)
 
-        print( "\n")
-        if cin == 1:
-            member_list = name_players()
-            sixteen_is_dead(len(member_list), member_list)
+            if cin == 2:
+                team_blue(2)
+            main()
+            break
+        except(IndexError, ValueError):
+            print("Only numbers!")
 
-        if cin == 2:
-            team_blue(2)
-        break
-    except(IndexError, ValueError):
-        print("Only numbers!")
+main()
