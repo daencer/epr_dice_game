@@ -61,6 +61,29 @@ def name_players():
         count += 1
         #print(member)
     return member
+def help_screen():
+    print("~~~~~~~~~~~~~~~~~~~")
+    print("Eingaben:")
+    print("")
+    print(" Next Player:  'n'")
+    print(" Roll again:   'Enter'")
+    print(" Quit:         'q'")
+    print("~~~~~~~~~~~~~~~~~~~")
+
+# Function: Credits aka Team_blue
+def team_blue(x):
+    if x == 1:
+        print("Credits")
+    else:
+        print("############################")
+        print("# Authors are:             #")
+        print("#                          #")
+        print("#      Markus Kalusche     #")
+        print("#           and            #")
+        print("#       Tobias Denzer      #")
+        print("#                          #")
+        print("############################")
+        print("\n")
 
 # Function: Game
 def sixteen_is_dead(players, members):
@@ -69,42 +92,51 @@ def sixteen_is_dead(players, members):
     hit_sixteen = False
     continue_game = True
     # pass through every player
+    print("\n")
+    help_screen()
     for i in range(players):
         if continue_game:
             total = 0
             last_turn = False
-            print(members[i])
+            print("\n")
+            print(members[i] + " ist am Zug!")
             # roll the dice(s) without end
             while True:
-                cin = input('Um zu wuerfeln, druecke ENTER... ')
-                if cin == 'n':
-                    # stop if player don't want anymore
-                    break
-                if cin == 'q':
-                    continue_game = False
-                    break
-                result = sum_from_string(roll_dice())
-                total += result
-                print('Gewuerfelt:', result, 'Summiert:', total)
-                # if player reaches the total of 9
-                if total == 9:
-                    print('9 erreicht. Du darfst nicht mehr würfeln.')
-                    last_turn = True
-                # if player reaches the total of 10
-                if total == 10:
-                    print('10 erreicht. Letztes Mal wuerfeln...')
-                    sleep(3)
-                    result = sum_from_string(roll_dice())
-                    total += result
-                    print('Gewuerfelt:', result, 'Summiert:', total)
-                    last_turn = True
-                # player reaches the total of 16 or higher
-                if total >= 16:
-                    loser = [members[i]]
-                    hit_sixteen = True
-                # stop if player hit sixteen or his last turn
-                if hit_sixteen or last_turn:
-                    break
+                    cin = input('Make your choice:')
+                    if cin == 'n':
+                        # stop if player don't want anymore
+                        break
+                    if cin == 'q':
+                        continue_game = False
+                        break
+                    if cin == "":
+                        result = sum_from_string(roll_dice())
+                        total += result
+                        print('Gewuerfelt:', result)
+                        print('Summiert:  ', total)
+                    else:
+                        help_screen()
+
+                    # if player reaches the total of 9
+                    if total == 9:
+                        print('9 erreicht. Du darfst nicht mehr würfeln.')
+                        last_turn = True
+                    # if player reaches the total of 10
+                    if total == 10:
+                        print('10 erreicht. Letztes Mal wuerfeln...')
+                        sleep(3)
+                        result = sum_from_string(roll_dice())
+                        total += result
+                        print('Gewuerfelt:', result, 'Summiert:', total)
+                        last_turn = True
+                    # player reaches the total of 16 or higher
+                    if total >= 16:
+                        loser = [members[i]]
+                        hit_sixteen = True
+                    # stop if player hit sixteen or his last turn
+                    if hit_sixteen or last_turn:
+                        break
+
             # assume that player one has the lowest result
             if i == 0:
                 lowest_result = total
@@ -123,73 +155,37 @@ def sixteen_is_dead(players, members):
             break
     if hit_sixteen:
         print('Die 16 wurde getroffen.')
+        print("LOOSER!!")
     else:
+        print("\n")
         print('Verlierer ist/sind')
         for i in loser:
             print(i)
         print('mit nur', lowest_result, 'Summenpunkten')
 
 # ~~~~~~~~~~~~~~~~ Main Game Frame ~~~~~~~~~~~~~~~~~~~~~
+def main():
+    print("########################################")
+    print("# [1] Play the Dice Game               #")
+    print("# [2] Credits                          #")
+    print("#                                      #")
+    print("# What is the correct answer?....      #")
+    print("########################################")
 
-print("########################################")
-print("# [1] Play the Dice Game               #")
-print("# [2] Settings                         #")
-print("# [3] Credits                          #")
-print("#                                      #")
-print("# What is the correct answer?....      #")
-print("########################################")
+    while True:
+        try:
+            cin = int(input("Choose wisely: "))
 
-while True:
-    try:
-        cin = int(input("Choose wisely: "))
-        print( "\n")
-        if cin == 1:
-            member_list = name_players()
-            sixteen_is_dead(len(member_list), member_list)
-        """
-            while count <= len(member_list) - 1:
-                try:
-                    print("\n")
-                    print(member_list[count],"ist am Zug!")
-                    user_input = input("Würfeln 'Enter', Aufhören 'n': ")
-                    sleep(3)
-                    if user_input == "":
-                        x = roll_dice()
-                        score.append(int(x))
-                        z = sum(score)
-                        print("Gewürfelt:   " + x )
-                        print("Insgesamt:   " + str(z))
-    #AB HIER FUNKTIONIERT NOCH NICHTS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#                    elif sum(score) == 10:
- #                       user_input = input("Sie müssen nochmal würfeln!")
-  #                  elif user_input == "stop":
-   #                     print(z)
-    #                    quit()
-     #               elif sum(score) >= 16 or z == 9:
-      #                  print("Sie haben verloren! try again!")
-       #                 break
-        #            elif user_input == "n":
-         #               count += 1
-          #              score.append(sum(score))
-           #             score = []
-            #        else:
-             #           print(player_1, "Ihr Ergebnis lautet: ", z)
-              #          if z >= 16 or z == 9:
-               #             print("Sie haben verloren")
-                #            print(toss_2)
-                 #           break
-                  #      else:
-                   #         print(toss_2)
-                    #        break
-                except(IndexError, ValueError):
-                    print("Only 'Enter' or 'n'")
-#BIS HIER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        elif cin == 2:
-            print("Settings")
-        elif cin == 3:
-            print("Credits")
-        elif cin == 42:
-            print("cheat Menu")"""
-        break
-    except(IndexError, ValueError):
-        print("Only numbers!")
+            print( "\n")
+            if cin == 1:
+                member_list = name_players()
+                sixteen_is_dead(len(member_list), member_list)
+
+            if cin == 2:
+                team_blue(2)
+            main()
+            break
+        except(IndexError, ValueError):
+            print("Only numbers!")
+
+main()
